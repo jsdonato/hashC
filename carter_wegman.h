@@ -5,11 +5,11 @@
 #include <string.h>
 
 typedef struct {
-    unsigned int a;  //
-    unsigned int b;  //
-    unsigned int p;  // Prime number used by hash.
-    unsigned int n;  // The universe size.
-    unsigned int k;  // The size of the range.
+    long long unsigned int a;  //
+    long long unsigned int b;  //
+    long long unsigned int p;  // Prime number used by hash.
+    long long unsigned int n;  // The universe size.
+    long long unsigned int k;  // The size of the range.
 } carter_wegman_hash;
 
 void carter_wegman_init(carter_wegman_hash * const hash) {
@@ -17,19 +17,19 @@ void carter_wegman_init(carter_wegman_hash * const hash) {
 }
 
 void carter_wegman_set(carter_wegman_hash * const hash,
-                        const unsigned int n_,
-                        const unsigned int k_) {
+                        const long long unsigned int n_,
+                        const long long unsigned int k_) {
 
 
   if (n_ != hash->n) {
-    unsigned int is_prime = 0;
+    long long unsigned int is_prime = 0;
     if (n_ <= 1) {
       hash->p = 2;
       is_prime = 1;
     }
 
-    unsigned int candidate = n_;
-    unsigned int i;
+    long long unsigned int candidate = n_;
+    long long unsigned int i;
     while (!is_prime) {
       i = 2;
       is_prime = 1;
@@ -50,8 +50,8 @@ void carter_wegman_set(carter_wegman_hash * const hash,
   hash->b = (rand() % hash->p);
 }
 
-unsigned int carter_wegman_h(const carter_wegman_hash * const hash,
-                             const unsigned int i) {
+long long unsigned int carter_wegman_h(const carter_wegman_hash * const hash,
+                                       const long long unsigned int i) {
   return ((hash->a * i + hash->b) % hash->p) % hash->k;
 }
 
